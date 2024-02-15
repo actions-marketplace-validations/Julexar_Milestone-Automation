@@ -1,0 +1,23 @@
+name: 'Milestone Automation'
+description: 'Automatically add a Milestone to a Pull Request or Issue when opened'
+author: 'Julexar'
+
+branding:
+  icon: tag
+  color: blue
+
+runs:
+  using: 'node16'
+  main: 'src/index.ts'
+
+inputs:
+  token:
+    description: 'GitHub Token'
+    required: true
+  milestone:
+    description: 'Name of the Milestone or glob pattern'
+    required: true
+  regex:
+    required: false
+    default: 'false'
+    description: 'Use the milestone as a regex pattern'
