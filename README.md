@@ -1,6 +1,4 @@
 # Milestone-Automation
-Automatically adds Milestones to PRs/Issues
-
 Automatically adds a Milestone to a pull requests or issue, based on the name/pattern of the Milestone.
 
 # Usage
