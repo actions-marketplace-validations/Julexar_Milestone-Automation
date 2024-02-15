@@ -1,6 +1,7 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { Context } from '@actions/github/lib/context';
+import * as _ from 'lodash';
 
 type GithubClient = ReturnType<typeof github.getOctokit>;
 
@@ -14,10 +15,11 @@ function getMilestoneNumber(client: GithubClient, milestoneTitle: string, useReg
         repo: github.context.repo.repo,
     })
     .then((response) => {
+        const regExp = _.escapeRegExp(milestoneTitle);
         const today = stripTime(new Date());
         const milestone = response.data
         .filter((milestone) => !milestone.due_on || stripTime(new Date(milestone.due_on)) >= today)
-        .find((milestone) => useRegex ? new RegExp(milestoneTitle).test(milestone.title) : milestone.title === milestoneTitle);
+        .find((milestone) => useRegex ? new RegExp(regExp).test(milestone.title) : milestone.title === milestoneTitle);
         
         const milestoneNumber = milestone?.number;
 
